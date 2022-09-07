@@ -14,11 +14,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.danielbookstore.model.Book;
 import com.example.danielbookstore.model.BookRepository;
+import com.example.danielbookstore.model.CategoryRepository;
 
 @Controller
 public class BookController {
 	@Autowired
 	private BookRepository repository; 
+	
+	@Autowired
+	private CategoryRepository crepo;
 	
     @RequestMapping(value= {"/", "/booklist"})
     public String bookList(Model model) {	
@@ -29,7 +33,9 @@ public class BookController {
     @RequestMapping(value = "/add")
     public String addBook(Model model){
     	model.addAttribute("book", new Book());
-        return "addbook";
+    	model.addAttribute("categories", crepo.findAll()); 
+
+    	return "addbook";
     }     
     
     @RequestMapping(value = "/save", method = RequestMethod.POST)
@@ -46,7 +52,8 @@ public class BookController {
 	@RequestMapping(value = "/edit/{id}")
     public String editBook(@PathVariable("id") Long bookId, Model model){
     	model.addAttribute("book", repository.findById(bookId));
-        return "editbook";
+		model.addAttribute("category", crepo.findAll());
+    	return "editbook";
     } 
 	@GetMapping("/books")
 	public @ResponseBody List<Book> bookListRest() {
