@@ -12,6 +12,8 @@ import org.springframework.context.annotation.Bean;
 import com.example.danielbookstore.model.Book;
 import com.example.danielbookstore.model.Category;
 import com.example.danielbookstore.model.CategoryRepository;
+import com.example.danielbookstore.model.User;
+import com.example.danielbookstore.model.UserRepository;
 import com.example.danielbookstore.model.BookRepository;
 
 @SpringBootApplication
@@ -24,7 +26,7 @@ public class DanielbookstoreApplication {
 	}
 
 	@Bean
-	public CommandLineRunner bookDemo(BookRepository repository, CategoryRepository crepo) {
+	public CommandLineRunner bookDemo(BookRepository repository, CategoryRepository crepo, UserRepository urepo) {
 		return (args) -> {
 			log.info("save a couple of students");
 			crepo.save(new Category("Fantasy"));
@@ -34,6 +36,13 @@ public class DanielbookstoreApplication {
 			repository.save(new Book("Harry Potter", "JK Rowling", 1999, "34421331", 20.0, crepo.findByName("Fantasy").get(0)));
 			repository.save(new Book("Harry Potter", "JK Rowling", 1999, "34421331", 20.0, crepo.findByName("Fantasy").get(0)));
 
+			User user1 = new User("user", "$2a$04$d2VDhQv3tLUBiR6Zp.pfOORsLeR/Qqqpk/bknRuPHKMUGsA1sGC3O", "USER");
+			User user2 = new User("admin", "$2a$04$eC7eQbfku.zj8ST9lkuZEubrnGi7iYtrU3s.mrO.xwpBY3Ym5om.W", "ADMIN");
+			
+			urepo.save(user1);
+			urepo.save(user2);
+			
+			
 			log.info("fetch all books");
 			for (Book book : repository.findAll()) {
 				log.info(book.toString());

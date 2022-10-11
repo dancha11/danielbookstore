@@ -24,6 +24,11 @@ public class BookController {
 	@Autowired
 	private CategoryRepository crepo;
 	
+	@RequestMapping(value="/login")
+    public String login() {	
+        return "login";
+    }	
+	
     @RequestMapping(value= {"/", "/booklist"})
     public String bookList(Model model) {	
         model.addAttribute("books", repository.findAll());
