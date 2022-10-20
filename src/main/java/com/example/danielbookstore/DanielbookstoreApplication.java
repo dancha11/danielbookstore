@@ -34,7 +34,7 @@ public class DanielbookstoreApplication {
 			crepo.save(new Category("Non-fiction"));
 			
 			repository.save(new Book("Harry Potter", "JK Rowling", 1999, "34421331", 20.0, crepo.findByName("Fantasy").get(0)));
-			repository.save(new Book("Harry Potter", "JK Rowling", 1999, "34421331", 20.0, crepo.findByName("Fantasy").get(0)));
+			repository.save(new Book("Test Book", "Test Author", 2000, "1245621", 10.0, crepo.findByName("Thriller").get(0)));
 
 			User user1 = new User("user", "$2a$04$d2VDhQv3tLUBiR6Zp.pfOORsLeR/Qqqpk/bknRuPHKMUGsA1sGC3O", "USER");
 			User user2 = new User("admin", "$2a$04$eC7eQbfku.zj8ST9lkuZEubrnGi7iYtrU3s.mrO.xwpBY3Ym5om.W", "ADMIN");
